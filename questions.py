@@ -116,6 +116,19 @@ for scenario in scenarios:
 if st.button('Submit'):
     if not (age and gender and city and civics and edu_bg):
         st.warning('Please fill all required fields!')
-    df.loc[len(df)] = [age, gender, city, civics, edu_bg, answers['a1'], answers['a2'], answers['a3'], answers['a4'], answers['a5']]
+    new_row = {
+        'age': age,
+        'gender': gender,
+        'city': city,
+        'civics': civics,
+        'edu_bg': edu_bg,
+        'answer_1': answers['a1'],
+        'answer_2': answers['a2'],
+        'answer_3': answers['a3'],
+        'answer_4': answers['a4'],
+        'answer_5': answers['a5']
+    }
+    #df.loc[len(df)] = [age, gender, city, civics, edu_bg, answers['a1'], answers['a2'], answers['a3'], answers['a4'], answers['a5']]
+    df.append(new_row, ignore_index=True)
     df.to_csv(CSV_FILE)
     st.success('Saved', icon=':material/done_outline:')
